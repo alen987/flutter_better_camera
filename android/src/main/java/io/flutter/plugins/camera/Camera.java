@@ -101,6 +101,7 @@ public class Camera {
 
   private boolean mAutoFocus;
   private int mFlash = Constants.FLASH_OFF;
+  private Float mLensFocusDistance;
 
   private CameraCharacteristics mCameraCharacteristics;
   private int mWhiteBalance = Constants.WB_AUTO;
@@ -789,10 +790,14 @@ public class Camera {
     } else {
       mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE,
               CaptureRequest.CONTROL_AF_MODE_OFF);
+      if(mLensFocusDistance!=null) {
+        mPreviewRequestBuilder.set(CaptureRequest.LENS_FOCUS_DISTANCE,
+                mLensFocusDistance);
+      }
     }
   }
 
-  void setAutoFocus(boolean autoFocus) {
+  void setAutoFocus(boolean autoFocus,double lensFocusDistance) {
     if (mAutoFocus == autoFocus) {
       return;
     }
@@ -800,6 +805,7 @@ public class Camera {
 
     mAutoFocus = autoFocus;
     if (mPreviewRequestBuilder != null) {
+      mLensFocusDistance=(float)lensFocusDistance;
       updateAutoFocus();
       if (mCaptureSession != null) {
         try {

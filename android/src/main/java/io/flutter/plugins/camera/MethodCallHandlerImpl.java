@@ -154,7 +154,7 @@ final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
       case "setAutoFocus":
         {
           try {
-            camera.setAutoFocus((boolean) call.argument("autoFocusValue"));
+            camera.setAutoFocus((boolean) call.argument("autoFocusValue"),(double) call.argument("lensFocusDistanceValue"));
             result.success(null);
           } catch (Exception e){
             handleException(e, result);
