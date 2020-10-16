@@ -406,7 +406,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
   }
 
   void toogleAutoFocus() {
-    controller.setAutoFocus(!controller.value.autoFocusEnabled,40.0);
+    controller.setAutoFocus(!controller.value.autoFocusEnabled);
     showInSnackBar('Toogle auto focus');
   }
 
