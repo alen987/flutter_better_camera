@@ -327,7 +327,7 @@ class CameraController extends ValueNotifier<CameraValue> {
     } on PlatformException catch (e) {
       throw CameraException(e.code, e.message);
     }
-
+    
     _eventSubscription =
         EventChannel('flutter.io/cameraPlugin/cameraEvents$_textureId')
             .receiveBroadcastStream()
@@ -611,14 +611,12 @@ class CameraController extends ValueNotifier<CameraValue> {
   }
 
   // Set autoFocusEnabled on camera
-  Future<void> setAutoFocus(bool newValue,double lensFocusDistance) async {
+  Future<void> setAutoFocus(bool newValue) async {
     value = value.copyWith(autoFocusEnabled: newValue);
     try {
       await _channel.invokeMethod<void>(
         'setAutoFocus',
-        <String, dynamic>{'autoFocusValue': newValue,
-          'lensFocusDistanceValue':lensFocusDistance},
-
+        <String, dynamic>{'autoFocusValue': newValue},
       );
     } on PlatformException catch (e) {
       throw CameraException(e.code, e.message);
